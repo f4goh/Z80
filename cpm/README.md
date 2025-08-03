@@ -1,4 +1,4 @@
-#  Lien entre CP/M des cartes Z80/68000 (1978–1979) et CP/M de l'Amstrad CPC
+#  CP/M des cartes Z80/68000 (1978–1979) et CP/M de l'Amstrad CPC
 
 ##  Origines du CP/M
 
