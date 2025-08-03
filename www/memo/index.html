@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Guide Z80 - Tables d'instructions</title>
+        <style>
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                font-family: "Courier New", Courier, monospace;
+                margin: 40px;
+                line-height: 1.6;
+            }
+
+            h1, h2 {
+                text-align: center;
+                color: #2c3e50;
+            }
+
+            p {
+                max-width: 800px;
+                margin: 0 auto 1em auto;
+                text-align: left;
+            }
+
+            table {
+                margin: 30px auto;
+                border-collapse: collapse;
+                width: auto;
+                max-width: 100%;
+                background-color: #f9f9f9;
+                border: 1px solid #ccc;
+            }
+
+            caption {
+                font-weight: bold;
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+
+            th, td {
+                border: 1px solid #ccc;
+                padding: 6px 12px;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            td:first-child {
+                font-weight: bold;
+                background-color: #e8e8e8;
+            }
+
+            img {
+                display: block;
+                margin: 40px auto;
+                max-width: 100%;
+                height: auto;
+                border: 1px solid #ccc;
+            }
+
+            @media print {
+                body {
+                    margin: 10mm;
+                    background-color: #fff;
+                    color: #000;
+                }
+
+                table {
+                    page-break-inside: avoid;
+                }
+
+                caption {
+                    font-size: 1em;
+                    font-weight: bold;
+                }
+            }
+            /* Couleur de fond pour la première ligne */
+            table tr:first-child td,
+            table tr:first-child th {
+                background-color: #dfe6e9;
+                font-weight: bold;
+            }
+
+            /* Couleur de fond pour la première colonne */
+            table td:first-child,
+            table th:first-child {
+                background-color: #dfe6e9;
+                font-weight: bold;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Guide Z80 - Tables d'instructions</h1>
+        <h2>(C)1976 by Mary Bell</h2>
+
+        <p>
+            Ce guide regroupe les instructions machine et assembleur du processeur Z80 sous forme de tableaux synthétiques. Il est conçu pour faciliter la lecture, la programmation et le décodage des instructions. Vous pouvez imprimer cette page ou l'utiliser comme référence interactive.
+        </p>
+
+        <!-- Table 1 -->
+        <!-- Jumps & INCs 00 to 3F -->
+        <table>
+            <caption>Jumps & INCs 00 to 3F</caption>
+            <tr><td>1's</td><td>16's&gt;</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+            <tr><td>0</td><td>JR</td><td>NOP</td><td>DJNZ</td><td>NZ</td><td>NC</td></tr>
+            <tr><td>1</td><td>nn-&gt;</td><td>BC</td><td>DE</td><td>HL</td><td>SP</td></tr>
+            <tr><td>2</td><td>A-&gt;</td><td>(BC)</td><td>(DE)</td><td>(HL)</td><td>(nn)</td></tr>
+            <tr><td>3</td><td>INC</td><td>BC</td><td>DE</td><td>HL</td><td>SP</td></tr>
+            <tr><td>4</td><td>INC</td><td>B</td><td>D</td><td>H</td><td>(HL)</td></tr>
+            <tr><td>5</td><td>DEC</td><td>B</td><td>D</td><td>H</td><td>(HL)</td></tr>
+            <tr><td>6</td><td>n-&gt;</td><td>B</td><td>D</td><td>H</td><td>(HL)</td></tr>
+            <tr><td>7</td><td></td><td>RLCA</td><td>RLA</td><td>DAA</td><td>SCF</td></tr>
+            <tr><td>8</td><td>JR</td><td>AF&lt;-&gt;AF'</td><td>UNC</td><td>Z</td><td>C</td></tr>
+            <tr><td>9</td><td>HL+</td><td>BC</td><td>DE</td><td>HL</td><td>SP</td></tr>
+            <tr><td>A</td><td>-&gt;A</td><td>(BC)</td><td>(DE)</td><td>(nn)-&gt;(HL)</td><td>(nn)</td></tr>
+            <tr><td>B</td><td>DEC</td><td>BC</td><td>DE</td><td>HL</td><td>SP</td></tr>
+            <tr><td>C</td><td>INC</td><td>C</td><td>E</td><td>L</td><td>A</td></tr>
+            <tr><td>D</td><td>DEC</td><td>C</td><td>E</td><td>L</td><td>A</td></tr>
+            <tr><td>E</td><td>n-&gt;</td><td>C</td><td>E</td><td>L</td><td>A</td></tr>
+            <tr><td>F</td><td></td><td>RRCA</td><td>RRA</td><td>CPL</td><td>CCF</td></tr>
+            <tr><td>1's</td><td>16's&gt;</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+        </table>
+        <!-- Table 2 -->
+        <!-- Call & Pushes C0 to FF -->
+        <table>
+            <caption>Call &amp; Pushes C0 to FF</caption>
+            <tr><td>1's</td><td>16's&gt;</td><td>C</td><td>D</td><td>E</td><td>F</td></tr>
+            <tr><td>0</td><td>RTN</td><td>NZ</td><td>NC</td><td>PO</td><td>NM</td></tr>
+            <tr><td>1</td><td>POP</td><td>BC</td><td>DE</td><td>HL</td><td>AF</td></tr>
+            <tr><td>2</td><td>JMP (nn)</td><td>NZ</td><td>NC</td><td>PO</td><td>NM</td></tr>
+            <tr><td>3</td><td></td><td>JMP (nn)</td><td>OUT (n)</td><td>HL&lt;-&gt;(SP)</td><td>DIS INT</td></tr>
+            <tr><td>4</td><td>CALL (nn)</td><td>NZ</td><td>NC</td><td>PO</td><td>NM</td></tr>
+            <tr><td>5</td><td>PUSH</td><td>BC</td><td>DE</td><td>HL</td><td>AF</td></tr>
+            <tr><td>6</td><td>A/n</td><td>+</td><td>-</td><td>AND</td><td>OR</td></tr>
+            <tr><td>7</td><td>RST</td><td>00h</td><td>10h</td><td>20h</td><td>30h</td></tr>
+            <tr><td>8</td><td>RTN</td><td>Z</td><td>C</td><td>PE</td><td>M</td></tr>
+            <tr><td>9</td><td></td><td>RTN</td><td>EXX</td><td>JMP (HL)</td><td>HL-&gt;SP</td></tr>
+            <tr><td>A</td><td>JMP (nn)</td><td>Z</td><td>C</td><td>PE</td><td>M</td></tr>
+            <tr><td>B</td><td></td><td>CNTL BITS</td><td>IN (n)</td><td>HL&lt;-&gt;DE</td><td>ENA INT</td></tr>
+            <tr><td>C</td><td>CALL (nn)</td><td>Z</td><td>C</td><td>PE</td><td>M</td></tr>
+            <tr><td>D</td><td></td><td>CALL (nn)</td><td>IX for HL</td><td>Ext Ins</td><td>IY for HL</td></tr>
+            <tr><td>E</td><td>A/n</td><td>+/cy</td><td>-/cy</td><td>XOR</td><td>CP</td></tr>
+            <tr><td>F</td><td>RST</td><td>08h</td><td>18h</td><td>28h</td><td>38h</td></tr>
+            <tr><td>1's</td><td>16's&gt;</td><td>C</td><td>D</td><td>E</td><td>F</td></tr>
+        </table>
+        <!-- Table 3 -->
+        <!-- Extended Instructions ED+n -->
+        <table>
+            <caption>Extended Instructions ED+n</caption>
+            <tr><td>1's</td><td>16's&gt;</td><td>4</td><td>5</td><td>6</td><td>7</td><td>A</td><td>B</td></tr>
+            <tr><td>0</td><td>IN(c)</td><td>B</td><td>D</td><td>H</td><td></td><td>LDI</td><td>LDIR</td></tr>
+            <tr><td>1</td><td>OUT(c)</td><td>B</td><td>D</td><td>H</td><td></td><td>CPI</td><td>CPIR</td></tr>
+            <tr><td>2</td><td>HL-/cy</td><td>BC</td><td>DE</td><td>HL</td><td>SP</td><td>INI</td><td>INIR</td></tr>
+            <tr><td>3</td><td>-&gt;(nn)</td><td>BC</td><td>DE</td><td></td><td>SP</td><td>OUTI</td><td>OUTIR</td></tr>
+            <tr><td>4</td><td></td><td>NEG</td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>5</td><td></td><td>RET NMI</td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>6</td><td></td><td>IM0</td><td>IM2</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>7</td><td></td><td>A-&gt;I</td><td>I-&gt;A</td><td>RRD</td><td></td><td></td><td></td></tr>
+            <tr><td>8</td><td>IN(c)</td><td>C</td><td>E</td><td>L</td><td>A</td><td>LDD</td><td>LDDR</td></tr>
+            <tr><td>9</td><td>OUT(c)</td><td>C</td><td>E</td><td>L</td><td>A</td><td>CPD</td><td>CPDR</td></tr>
+            <tr><td>A</td><td>HL+/cy</td><td>BC</td><td>DE</td><td>HL</td><td>SP</td><td>IND</td><td>INDR</td></tr>
+            <tr><td>B</td><td>(nn)-&gt;</td><td>BC</td><td>DE</td><td>HL</td><td>SP</td><td>OUTD</td><td>OUTDR</td></tr>
+            <tr><td>C</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>D</td><td></td><td>RET MI</td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>E</td><td></td><td></td><td>IM2</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>F</td><td></td><td>A-&gt;R</td><td>R-&gt;A</td><td>RLD</td><td></td><td></td><td></td></tr>
+            <tr><td>1's</td><td>16's&gt;</td><td>4</td><td>5</td><td>6</td><td>7</td><td>A</td><td>B</td></tr>
+        </table>
+        <!-- Table 4 -->
+        <!-- Register Ops 40 to 7F -->
+        <table>
+            <caption>Register Ops 40 to 7F</caption>
+            <tr>
+                <td colspan="9"></td>
+                <td colspan="8">source reg</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4">operations w/A</td>
+                <td colspan="4"></td>
+                <td>B</td><td>C</td><td>D</td><td>E</td><td>H</td><td>L</td><td>(HL)</td><td>A</td><td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>+/cy</td><td>-/cy</td><td>XOR</td><td>CP</td>
+                <td>C</td><td>E</td><td>L</td><td>A</td>
+                <td>8</td><td>9</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>&lt;1's</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>+</td><td>-</td><td>AND</td><td>OR</td>
+                <td>B</td><td>D</td><td>H</td><td>(HL)</td>
+                <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>&lt;1's</td>
+            </tr>
+            <tr>
+                <td>16's&gt;</td>
+                <td>8</td><td>9</td><td>A</td><td>B</td>
+                <td>4</td><td>5</td><td>6</td><td>7</td>
+                <td colspan="9"></td>
+            </tr>
+            <tr>
+                <td colspan="5">Ex: 9A=SBC A,D</td>
+                <td colspan="4">move destination</td>
+                <td colspan="9">Note: 76=HALT</td>
+            </tr>
+        </table>
+
+        <!-- Table 5 -->
+        <!-- Control Bits CB+ 00–FF -->
+        <table>
+            <caption>Control Bits CB+ 00–FF</caption>
+            <tr>
+                <td></td>
+                <td colspan="8">Source Reg</td>
+                <td colspan="9">Ex: CB 5A = TEST BIT 3,D</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>B</td><td>C</td><td>D</td><td>E</td><td>H</td><td>L</td><td>(HL)</td><td>A</td>
+                <td colspan="4">BIT#</td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>1's&gt;</td>
+                <td>8</td><td>9</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td>
+                <td>1</td><td>3</td><td>5</td><td>7</td>
+                <td>RRC</td><td>RR</td><td>SRA</td><td>SRL</td><td>&lt;ops</td>
+            </tr>
+            <tr>
+                <td>1's&gt;</td>
+                <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td>
+                <td>0</td><td>2</td><td>4</td><td>6</td>
+                <td>RLC</td><td>RL</td><td>SLA</td><td></td><td>&lt;ops</td>
+            </tr>
+            <tr>
+                <td>16's&gt;</td>
+                <td colspan="7"></td>
+                <td>SET&gt;</td>
+                <td>C</td><td>D</td><td>E</td><td>F</td>
+                <td>0</td><td>1</td><td>2</td><td>3</td><td>&lt;16's</td>
+            </tr>
+            <tr>
+                <td>16's&gt;</td>
+                <td colspan="7"></td>
+                <td>RESET&gt;</td>
+                <td>8</td><td>9</td><td>A</td><td>B</td>
+                <td colspan="4"></td>
+                <td>&lt;16's</td>
+            </tr>
+            <tr>
+                <td>16's&gt;</td>
+                <td colspan="7"></td>
+                <td>TEST&gt;</td>
+                <td>4</td><td>5</td><td>6</td><td>7</td>
+                <td colspan="4"></td>
+                <td>&lt;16's</td>
+            </tr>
+        </table>
+
+
+        <h1>Graphics Version</h1>
+        <p>
+            You might want to print this out full page and then cut it apart and paste to 3 by 5 cards for a home-made handy reference.
+        </p>
+
+        <img src="Z80.png" alt="Z80 Instruction Set Graphic" width="1425" height="1700">
+
+        <p style="text-align: center; margin-top: 40px;">
+            📌 Pour une utilisation optimale, imprimez cette page en format paysage et conservez-la comme aide-mémoire.
+        </p>
+    </body>
+</html>
