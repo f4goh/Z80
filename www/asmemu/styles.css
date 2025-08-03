@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+
+* {
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+#columns {
+    display: grid;
+    height: 95vh;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1.1fr 1fr 0.3fr 1fr;
+    grid-gap: 0.25rem;
+    grid-template-areas:
+        "editor memory"
+        "editor memory"
+        "regs runtab"
+        "regs specialregs"
+        "author specialregs";
+}
+
+@media only screen and (max-width: 980px) {
+    #columns {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #memoryListDiv {
+        height: 100% !important;
+    }
+}
+
+#editorDiv {
+    grid-area: editor;
+    display: grid;
+    grid-template-rows: 13fr 1fr;
+}
+
+#editor {
+    width: 100%;
+    resize: none;
+}
+
+#editorContainer {
+    display: flex;
+}
+
+#compileBar {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#compilerErrorText {
+    color: orangered;
+    margin: 0;
+}
+
+.infoText {
+    text-align: center;
+    margin: 0.25rem;
+}
+
+.border {
+    border: 1px solid black;
+}
+
+.customBtn {
+    border-radius: 0;
+    border: 1px solid black;
+    background-color: whitesmoke;
+    margin: 0;
+}
+
+.customBtn:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+#memoryDivContainer {
+    grid-area: memory;
+}
+
+#memoryHeader {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+#memoryListDiv {
+    min-height: 0;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+#regsDivContainer {
+    grid-area: regs;
+}
+
+#authorDiv {
+    grid-area: author;
+    display: grid;
+    place-items: center;
+}
+
+#authorDiv > h5 {
+    margin: 0.25rem;
+}
+
+#specialRegsDivContainer {
+    grid-area: specialregs;
+}
+
+#runProgramDiv {
+    grid-area: runtab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#runProgramLeftBtns {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.memoryAddress {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.memoryAddress > p {
+    margin: 0.2rem 0;
+}
+
+.memAdresssMatchedInstruction {
+    color: black;
+    font-size: 80%;
+}
+
+.memAtPC {
+    background-color: lightgray;
+}
+
+#regsDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.regDiv { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+    margin: 0.25rem;
+}
+
+.regDiv > p {
+    margin: 0.1rem 0;
+}
+
+.byteInput {
+    background-color: #FBFBFB;
+    border: 1px solid black;
+    border-radius: 0.1rem;
+}
+
+.byteInput:focus {
+    background-color: white;
+}
