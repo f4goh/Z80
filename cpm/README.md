@@ -36,12 +36,6 @@
 
 ---
 
-## Conclusion
-
-Le CP/M de l’Amstrad CPC est **directement issu** des versions CP/M utilisées sur les cartes Z80 de la fin des années 1970. Il s’agit d’une **adaptation spécifique** à la plateforme CPC, mais basée sur les mêmes principes, avec une volonté de **compatibilité logicielle maximale** avec les logiciels CP/M existants.
-
----
-
 # Instructions CP/M 2.2 pour Z80
 
 ## Commandes internes (Console Command Processor - CCP)
@@ -90,8 +84,9 @@ LD DE, MSG       ; Adresse de la chaîne à afficher
 CALL 0005h       ; Appel BDOS
 
 MSG: DB 'Bonjour CP/M!$'
+```
 
-## 🧠 Tableau des fonctions BDOS – CP/M 2.2
+## Tableau des fonctions BDOS – CP/M 2.2
 
 | Code | Fonction BDOS               | Description                                                                 |
 |------|-----------------------------|-----------------------------------------------------------------------------|
@@ -129,6 +124,8 @@ MSG: DB 'Bonjour CP/M!$'
 | 1Fh  | Get File Attributes         | Lit les attributs d’un fichier                                              |
 
 
-https://github.com/Z80-Retro/cpm-2.2
+[cpm-2.2 Source, Manuals and Utilities](https://github.com/Z80-Retro/cpm-2.2) 
+
+
 
 
