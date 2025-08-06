@@ -1,0 +1,54 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+    _EXEC_OPCODE                                                =   00000000 
+    _SER_RX                                                     =   00000001 
+    _STORE_OPCODE                                               =   00000001 
+  0 ___str_1                                                        000001DA R
+  0 ___str_10                                                       00000241 R
+  0 ___str_11                                                       00000249 R
+  0 ___str_12                                                       0000024B R
+  0 ___str_13                                                       00000255 R
+  0 ___str_14                                                       0000026C R
+  0 ___str_15                                                       00000271 R
+  0 ___str_16                                                       00000283 R
+  0 ___str_5                                                        000001DB R
+  0 ___str_6                                                        000001E1 R
+  0 ___str_7                                                        00000200 R
+  0 ___str_8                                                        0000021F R
+  0 ___str_9                                                        0000023B R
+    __mullonglong                                                   ******** GX
+  7 __xinit__message                                                00000000 R
+  1 _c                                                              00000000 GR
+  0 _delay                                                          00000015 GR
+    _getchar                                                        ******** GX
+  1 _i                                                              00000001 GR
+  0 _main                                                           000000F0 GR
+  2 _message                                                        00000000 GR
+    _printf                                                         ******** GX
+    _putchar                                                        ******** GX
+    _puts                                                           ******** GX
+  0 _userKey                                                        00000000 GR
+  0 _userLed                                                        0000000D GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size      29A   flags    0
+   1 _DATA                                      size        3   flags    0
+   2 _INITIALIZED                               size        C   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        0   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size        C   flags    0
+   8 _CABS                                      size        0   flags    8
+

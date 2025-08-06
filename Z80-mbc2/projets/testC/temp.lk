@@ -1,0 +1,11 @@
+-mjwx
+-i temp.hex
+-b _CODE = 0x0200
+-b _DATA = 0x8000
+-k C:\sdcc\bin\..\lib\z80
+-l z80
+temp.rel
+S190818-R011023_crt0.rel
+S290923_Z80-MBC2.rel
+
+-e

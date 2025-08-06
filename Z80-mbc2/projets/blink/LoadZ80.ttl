@@ -1,0 +1,69 @@
+;###########################################################
+; Tera-Term Macro for Z80-MBC2 automated loading using iLoad
+; by Just4Fun
+;###########################################################
+
+;
+; Set working directory and the Intel-Hex file to load
+;
+; ********************************************************
+; Adapt the following line to your system configuration!
+;
+; Set you working directory (your source files) to setdir
+; ********************************************************
+;
+; Définir le répertoire de travail
+; Définir le dossier de travail
+; Définir le dossier de travail
+setdir 'F:\importf\Z80\projets\blink'
+
+; Définir le fichier de log
+logopen 'upload.log' 1
+logwrite '--- Début du transfert ---'
+
+; Connexion au port série
+logwrite 'Connexion au port COM91...'
+connect '/C=91'
+if result != 0 then
+    messagebox '❌ Connexion série impossible !' 'Erreur'
+    logwrite 'Erreur : connexion COM91 échouée'
+    logclose
+    closett
+endif
+
+pause 1
+mpause 3000
+logwrite 'Connexion établie. Attente du boot Z80...'
+
+; Ouvrir le fichier Intel Hex
+logwrite 'Ouverture du fichier : load.hex'
+fileopen commandfile 'load.hex' 0
+if result != 0 then
+    messagebox '❌ Erreur : impossible d’ouvrir load.hex !' 'Erreur'
+    logwrite 'Erreur : fichier load.hex introuvable'
+    logclose
+    closett
+endif
+
+; Boucle d'envoi ligne par ligne
+:setuplogic
+logwrite 'Début du transfert ligne par ligne'
+
+:looper
+filereadln commandfile statement
+if result != 0 then
+    goto end_macro
+endif
+
+sendln statement
+logwrite 'Ligne envoyée : ' + statement
+mpause 40
+goto looper
+
+; Fin du transfert
+:end_macro
+fileclose commandfile
+logwrite '✅ Transfert terminé avec succès'
+messagebox '✅ Fichier envoyé avec succès !' 'Info'
+logclose
+closett

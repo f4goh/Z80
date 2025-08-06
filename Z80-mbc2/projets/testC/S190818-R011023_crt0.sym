@@ -1,0 +1,38 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |     _IM1_IRQ    ******** GX  |   0 __clock     00000000 GR
+  0 _exit       00000004 GR  |     _main       ******** GX  |   D gsinit      00000000 GR
+  D gsinit_n    00000025 R   |   A init        00000100 R   |     l__DATA     ******** GX
+    l__INITI    ******** GX  |     s__DATA     ******** GX  |     s__INITI    ******** GX
+    s__INITI    ******** GX  |   D zeroed_d    00000016 R
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size        A   flags    0
+   1 _HEADER    size        0   flags    8
+   2 _HEADER0   size        3   flags    8
+   3 _HEADER1   size        3   flags    8
+   4 _HEADER2   size        3   flags    8
+   5 _HEADER3   size        3   flags    8
+   6 _HEADER4   size        3   flags    8
+   7 _HEADER5   size        3   flags    8
+   8 _HEADER6   size        3   flags    8
+   9 _HEADER7   size       12   flags    8
+   A _HEADER8   size        C   flags    8
+   B _HOME      size        0   flags    0
+   C _INITIAL   size        0   flags    0
+   D _GSINIT    size       25   flags    0
+   E _GSFINAL   size        1   flags    0
+   F _DATA      size        0   flags    0
+  10 _INITIAL   size        0   flags    0
+  11 _BSEG      size        0   flags    0
+  12 _BSS       size        0   flags    0
+  13 _HEAP      size        0   flags    0
+

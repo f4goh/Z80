@@ -1,0 +1,418 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module Blink_MBC2
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _putchar
+                                     13 	.globl _getchar
+                                     14 	.globl _puts
+                                     15 	.globl _printf
+                                     16 	.globl _message
+                                     17 	.globl _i
+                                     18 	.globl _c
+                                     19 	.globl _userKey
+                                     20 	.globl _userLed
+                                     21 	.globl _delay
+                                     22 ;--------------------------------------------------------
+                                     23 ; special function registers
+                                     24 ;--------------------------------------------------------
+                         00000000    25 _EXEC_OPCODE	=	0x0000
+                         00000001    26 _STORE_OPCODE	=	0x0001
+                         00000001    27 _SER_RX	=	0x0001
+                                     28 ;--------------------------------------------------------
+                                     29 ; ram data
+                                     30 ;--------------------------------------------------------
+                                     31 	.area _DATA
+    00000000                         32 _c::
+    00000000                         33 	.ds 1
+    00000001                         34 _i::
+    00000001                         35 	.ds 2
+                                     36 ;--------------------------------------------------------
+                                     37 ; ram data
+                                     38 ;--------------------------------------------------------
+                                     39 	.area _INITIALIZED
+    00000000                         40 _message::
+    00000000                         41 	.ds 12
+                                     42 ;--------------------------------------------------------
+                                     43 ; absolute external ram data
+                                     44 ;--------------------------------------------------------
+                                     45 	.area _DABS (ABS)
+                                     46 ;--------------------------------------------------------
+                                     47 ; global & static initialisations
+                                     48 ;--------------------------------------------------------
+                                     49 	.area _HOME
+                                     50 	.area _GSINIT
+                                     51 	.area _GSFINAL
+                                     52 	.area _GSINIT
+                                     53 ;--------------------------------------------------------
+                                     54 ; Home
+                                     55 ;--------------------------------------------------------
+                                     56 	.area _HOME
+                                     57 	.area _HOME
+                                     58 ;--------------------------------------------------------
+                                     59 ; code
+                                     60 ;--------------------------------------------------------
+                                     61 	.area _CODE
+                                     62 ;Blink_MBC2.c:134: char userKey()
+                                     63 ;	---------------------------------
+                                     64 ; Function userKey
+                                     65 ; ---------------------------------
+    00000000                         66 _userKey::
+                                     67 ;Blink_MBC2.c:136: STORE_OPCODE = USRKEY;
+    00000000 3E 80            [ 7]   68 	ld	a, #0x80
+    00000002 D3 01            [11]   69 	out	(_STORE_OPCODE), a
+                                     70 ;Blink_MBC2.c:137: c = EXEC_OPCODE;
+    00000004 DB 00            [11]   71 	in	a, (_EXEC_OPCODE)
+    00000006 32r00r00         [13]   72 	ld	(_c+0), a
+                                     73 ;Blink_MBC2.c:138: return c;
+    00000009 3Ar00r00         [13]   74 	ld	a, (_c)
+                                     75 ;Blink_MBC2.c:139: }
+    0000000C C9               [10]   76 	ret
+                                     77 ;Blink_MBC2.c:141: void userLed(char c)
+                                     78 ;	---------------------------------
+                                     79 ; Function userLed
+                                     80 ; ---------------------------------
+    0000000D                         81 _userLed::
+    0000000D 4F               [ 4]   82 	ld	c, a
+                                     83 ;Blink_MBC2.c:143: STORE_OPCODE = USRLED;
+    0000000E AF               [ 4]   84 	xor	a, a
+    0000000F D3 01            [11]   85 	out	(_STORE_OPCODE), a
+                                     86 ;Blink_MBC2.c:144: EXEC_OPCODE = c;
+    00000011 79               [ 4]   87 	ld	a, c
+    00000012 D3 00            [11]   88 	out	(_EXEC_OPCODE), a
+                                     89 ;Blink_MBC2.c:145: }
+    00000014 C9               [10]   90 	ret
+                                     91 ;Blink_MBC2.c:147: void delay(unsigned short d)
+                                     92 ;	---------------------------------
+                                     93 ; Function delay
+                                     94 ; ---------------------------------
+    00000015                         95 _delay::
+    00000015 FD 21 F0 FF      [14]   96 	ld	iy, #-16
+    00000019 FD 39            [15]   97 	add	iy, sp
+    0000001B FD F9            [10]   98 	ld	sp, iy
+    0000001D EB               [ 4]   99 	ex	de, hl
+                                    100 ;Blink_MBC2.c:150: j= (unsigned long long) d * 1000;
+    0000001E FD 21 08 00      [14]  101 	ld	iy, #8
+    00000022 FD 39            [15]  102 	add	iy, sp
+    00000024 FD 73 00         [19]  103 	ld	0 (iy), e
+    00000027 FD 72 01         [19]  104 	ld	1 (iy), d
+    0000002A AF               [ 4]  105 	xor	a, a
+    0000002B FD 77 02         [19]  106 	ld	2 (iy), a
+    0000002E FD 77 03         [19]  107 	ld	3 (iy), a
+    00000031 FD 77 04         [19]  108 	ld	4 (iy), a
+    00000034 FD 77 05         [19]  109 	ld	5 (iy), a
+    00000037 FD 77 06         [19]  110 	ld	6 (iy), a
+    0000003A FD 77 07         [19]  111 	ld	7 (iy), a
+    0000003D FD 6E 06         [19]  112 	ld	l, 6 (iy)
+    00000040 FD 66 07         [19]  113 	ld	h, 7 (iy)
+    00000043 E5               [11]  114 	push	hl
+    00000044 FD 6E 04         [19]  115 	ld	l, 4 (iy)
+    00000047 FD 66 05         [19]  116 	ld	h, 5 (iy)
+    0000004A E5               [11]  117 	push	hl
+    0000004B FD 6E 02         [19]  118 	ld	l, 2 (iy)
+    0000004E FD 66 03         [19]  119 	ld	h, 3 (iy)
+    00000051 E5               [11]  120 	push	hl
+    00000052 FD 6E 00         [19]  121 	ld	l, 0 (iy)
+    00000055 FD 66 01         [19]  122 	ld	h, 1 (iy)
+    00000058 E5               [11]  123 	push	hl
+    00000059 21 00 00         [10]  124 	ld	hl, #0x0000
+    0000005C E5               [11]  125 	push	hl
+    0000005D E5               [11]  126 	push	hl
+    0000005E E5               [11]  127 	push	hl
+    0000005F 21 E8 03         [10]  128 	ld	hl, #0x03e8
+    00000062 E5               [11]  129 	push	hl
+                                    130 ;Blink_MBC2.c:151: for (i=0; i < j; i++ );
+    00000063 21 10 00         [10]  131 	ld	hl, #0x0010
+    00000066 39               [11]  132 	add	hl, sp
+    00000067 E5               [11]  133 	push	hl
+    00000068 CDr00r00         [17]  134 	call	__mullonglong
+    0000006B 21 12 00         [10]  135 	ld	hl, #18
+    0000006E 39               [11]  136 	add	hl, sp
+    0000006F F9               [ 6]  137 	ld	sp, hl
+    00000070 AF               [ 4]  138 	xor	a, a
+    00000071 FD 21 08 00      [14]  139 	ld	iy, #8
+    00000075 FD 39            [15]  140 	add	iy, sp
+    00000077 FD 77 00         [19]  141 	ld	0 (iy), a
+    0000007A FD 77 01         [19]  142 	ld	1 (iy), a
+    0000007D FD 77 02         [19]  143 	ld	2 (iy), a
+    00000080 FD 77 03         [19]  144 	ld	3 (iy), a
+    00000083 FD 77 04         [19]  145 	ld	4 (iy), a
+    00000086 FD 77 05         [19]  146 	ld	5 (iy), a
+    00000089 FD 77 06         [19]  147 	ld	6 (iy), a
+    0000008C FD 77 07         [19]  148 	ld	7 (iy), a
+    0000008F                        149 00103$:
+    0000008F 21 00 00         [10]  150 	ld	hl, #0
+    00000092 39               [11]  151 	add	hl, sp
+    00000093 FD 21 08 00      [14]  152 	ld	iy, #8
+    00000097 FD 39            [15]  153 	add	iy, sp
+    00000099 FD 7E 00         [19]  154 	ld	a, 0 (iy)
+    0000009C 96               [ 7]  155 	sub	a, (hl)
+    0000009D FD 7E 01         [19]  156 	ld	a, 1 (iy)
+    000000A0 23               [ 6]  157 	inc	hl
+    000000A1 9E               [ 7]  158 	sbc	a, (hl)
+    000000A2 FD 7E 02         [19]  159 	ld	a, 2 (iy)
+    000000A5 23               [ 6]  160 	inc	hl
+    000000A6 9E               [ 7]  161 	sbc	a, (hl)
+    000000A7 FD 7E 03         [19]  162 	ld	a, 3 (iy)
+    000000AA 23               [ 6]  163 	inc	hl
+    000000AB 9E               [ 7]  164 	sbc	a, (hl)
+    000000AC FD 7E 04         [19]  165 	ld	a, 4 (iy)
+    000000AF 23               [ 6]  166 	inc	hl
+    000000B0 9E               [ 7]  167 	sbc	a, (hl)
+    000000B1 FD 7E 05         [19]  168 	ld	a, 5 (iy)
+    000000B4 23               [ 6]  169 	inc	hl
+    000000B5 9E               [ 7]  170 	sbc	a, (hl)
+    000000B6 FD 7E 06         [19]  171 	ld	a, 6 (iy)
+    000000B9 23               [ 6]  172 	inc	hl
+    000000BA 9E               [ 7]  173 	sbc	a, (hl)
+    000000BB FD 7E 07         [19]  174 	ld	a, 7 (iy)
+    000000BE 23               [ 6]  175 	inc	hl
+    000000BF 9E               [ 7]  176 	sbc	a, (hl)
+    000000C0 30 28            [12]  177 	jr	NC, 00105$
+    000000C2 FD 34 00         [23]  178 	inc	0 (iy)
+    000000C5 20 C8            [12]  179 	jr	NZ, 00103$
+    000000C7 FD 34 01         [23]  180 	inc	1 (iy)
+    000000CA 20 C3            [12]  181 	jr	NZ, 00103$
+    000000CC FD 34 02         [23]  182 	inc	2 (iy)
+    000000CF 20 BE            [12]  183 	jr	NZ, 00103$
+    000000D1 FD 34 03         [23]  184 	inc	3 (iy)
+    000000D4 20 B9            [12]  185 	jr	NZ, 00103$
+    000000D6 FD 34 04         [23]  186 	inc	4 (iy)
+    000000D9 20 B4            [12]  187 	jr	NZ, 00103$
+    000000DB FD 34 05         [23]  188 	inc	5 (iy)
+    000000DE 20 AF            [12]  189 	jr	NZ, 00103$
+    000000E0 FD 34 06         [23]  190 	inc	6 (iy)
+    000000E3 20 AA            [12]  191 	jr	NZ, 00103$
+    000000E5 FD 34 07         [23]  192 	inc	7 (iy)
+    000000E8 18 A5            [12]  193 	jr	00103$
+    000000EA                        194 00105$:
+                                    195 ;Blink_MBC2.c:152: }
+    000000EA 21 10 00         [10]  196 	ld	hl, #16
+    000000ED 39               [11]  197 	add	hl, sp
+    000000EE F9               [ 6]  198 	ld	sp, hl
+    000000EF C9               [10]  199 	ret
+                                    200 ;Blink_MBC2.c:154: void main(void) { 
+                                    201 ;	---------------------------------
+                                    202 ; Function main
+                                    203 ; ---------------------------------
+    000000F0                        204 _main::
+                                    205 ;Blink_MBC2.c:155: printf("\n");
+    000000F0 21rDAr01         [10]  206 	ld	hl, #___str_1
+    000000F3 CDr00r00         [17]  207 	call	_puts
+                                    208 ;Blink_MBC2.c:156: printf(message);
+    000000F6 21r00r00         [10]  209 	ld	hl, #_message
+    000000F9 E5               [11]  210 	push	hl
+    000000FA CDr00r00         [17]  211 	call	_printf
+    000000FD F1               [10]  212 	pop	af
+                                    213 ;Blink_MBC2.c:158: printf("\nJust some counts...\n\n");
+    000000FE 21r83r02         [10]  214 	ld	hl, #___str_16
+    00000101 CDr00r00         [17]  215 	call	_puts
+                                    216 ;Blink_MBC2.c:159: for (i=0; i<11; i++) printf("I=%d\n", i);
+    00000104 21 00 00         [10]  217 	ld	hl, #0x0000
+    00000107 22r01r00         [16]  218 	ld	(_i), hl
+    0000010A                        219 00112$:
+    0000010A 2Ar01r00         [16]  220 	ld	hl, (_i)
+    0000010D E5               [11]  221 	push	hl
+    0000010E 21rDBr01         [10]  222 	ld	hl, #___str_5
+    00000111 E5               [11]  223 	push	hl
+    00000112 CDr00r00         [17]  224 	call	_printf
+    00000115 F1               [10]  225 	pop	af
+    00000116 F1               [10]  226 	pop	af
+    00000117 2Ar01r00         [16]  227 	ld	hl, (_i)
+    0000011A 23               [ 6]  228 	inc	hl
+    0000011B 22r01r00         [16]  229 	ld	(_i), hl
+    0000011E 3Ar01r00         [13]  230 	ld	a, (_i+0)
+    00000121 D6 0B            [ 7]  231 	sub	a, #0x0b
+    00000123 3Ar02r00         [13]  232 	ld	a, (_i+1)
+    00000126 17               [ 4]  233 	rla
+    00000127 3F               [ 4]  234 	ccf
+    00000128 1F               [ 4]  235 	rra
+    00000129 DE 80            [ 7]  236 	sbc	a, #0x80
+    0000012B 38 DD            [12]  237 	jr	C, 00112$
+                                    238 ;Blink_MBC2.c:161: printf("\nPress USER key to continue...");
+    0000012D 21rE1r01         [10]  239 	ld	hl, #___str_6
+    00000130 E5               [11]  240 	push	hl
+    00000131 CDr00r00         [17]  241 	call	_printf
+    00000134 F1               [10]  242 	pop	af
+                                    243 ;Blink_MBC2.c:162: while (userKey() == 0);
+    00000135                        244 00102$:
+    00000135 CDr00r00         [17]  245 	call	_userKey
+    00000138 B7               [ 4]  246 	or	a, a
+    00000139 28 FA            [12]  247 	jr	Z, 00102$
+                                    248 ;Blink_MBC2.c:164: printf("\nPress 'b' to start blinking >");
+    0000013B 21r00r02         [10]  249 	ld	hl, #___str_7
+    0000013E E5               [11]  250 	push	hl
+    0000013F CDr00r00         [17]  251 	call	_printf
+    00000142 F1               [10]  252 	pop	af
+                                    253 ;Blink_MBC2.c:165: do
+    00000143                        254 00106$:
+                                    255 ;Blink_MBC2.c:166: c = getchar();
+    00000143 CDr00r00         [17]  256 	call	_getchar
+    00000146 21r00r00         [10]  257 	ld	hl, #_c
+    00000149 73               [ 7]  258 	ld	(hl), e
+                                    259 ;Blink_MBC2.c:167: while ((c != 'b') && (c != 'B'));
+    0000014A 3Ar00r00         [13]  260 	ld	a,(_c+0)
+    0000014D FE 62            [ 7]  261 	cp	a,#0x62
+    0000014F 28 04            [12]  262 	jr	Z, 00108$
+    00000151 D6 42            [ 7]  263 	sub	a, #0x42
+    00000153 20 EE            [12]  264 	jr	NZ, 00106$
+    00000155                        265 00108$:
+                                    266 ;Blink_MBC2.c:168: putchar('b');
+    00000155 21 62 00         [10]  267 	ld	hl, #0x0062
+    00000158 CDr00r00         [17]  268 	call	_putchar
+                                    269 ;Blink_MBC2.c:170: printf("\n\nAt last start blinking...");
+    0000015B 21r1Fr02         [10]  270 	ld	hl, #___str_8
+    0000015E E5               [11]  271 	push	hl
+    0000015F CDr00r00         [17]  272 	call	_printf
+    00000162 F1               [10]  273 	pop	af
+                                    274 ;Blink_MBC2.c:171: delay(10);
+    00000163 21 0A 00         [10]  275 	ld	hl, #0x000a
+    00000166 CDr15r00         [17]  276 	call	_delay
+                                    277 ;Blink_MBC2.c:173: printf ("%c[2J",27);                            // Clear screen
+    00000169 21 1B 00         [10]  278 	ld	hl, #0x001b
+    0000016C E5               [11]  279 	push	hl
+    0000016D 21r3Br02         [10]  280 	ld	hl, #___str_9
+    00000170 E5               [11]  281 	push	hl
+    00000171 CDr00r00         [17]  282 	call	_printf
+    00000174 F1               [10]  283 	pop	af
+                                    284 ;Blink_MBC2.c:174: printf ("%c[?25l",27);                          // Cursor invisible
+    00000175 21 1B 00         [10]  285 	ld	hl, #0x001b
+    00000178 E3               [19]  286 	ex	(sp),hl
+    00000179 21r41r02         [10]  287 	ld	hl, #___str_10
+    0000017C E5               [11]  288 	push	hl
+    0000017D CDr00r00         [17]  289 	call	_printf
+    00000180 F1               [10]  290 	pop	af
+    00000181 F1               [10]  291 	pop	af
+                                    292 ;Blink_MBC2.c:175: while (1)
+    00000182                        293 00110$:
+                                    294 ;Blink_MBC2.c:177: userLed(1);                                 // User led on
+    00000182 3E 01            [ 7]  295 	ld	a, #0x01
+    00000184 CDr0Dr00         [17]  296 	call	_userLed
+                                    297 ;Blink_MBC2.c:178: printf("\r");
+    00000187 21r49r02         [10]  298 	ld	hl, #___str_11
+    0000018A E5               [11]  299 	push	hl
+    0000018B CDr00r00         [17]  300 	call	_printf
+                                    301 ;Blink_MBC2.c:179: printf ("%c[15;30H",27);
+    0000018E 21 1B 00         [10]  302 	ld	hl, #0x001b
+    00000191 E3               [19]  303 	ex	(sp),hl
+    00000192 21r4Br02         [10]  304 	ld	hl, #___str_12
+    00000195 E5               [11]  305 	push	hl
+    00000196 CDr00r00         [17]  306 	call	_printf
+    00000199 F1               [10]  307 	pop	af
+                                    308 ;Blink_MBC2.c:180: printf ("%c[7m * * LED on  * * ",27);       // Print reverse
+    0000019A 21 1B 00         [10]  309 	ld	hl, #0x001b
+    0000019D E3               [19]  310 	ex	(sp),hl
+    0000019E 21r55r02         [10]  311 	ld	hl, #___str_13
+    000001A1 E5               [11]  312 	push	hl
+    000001A2 CDr00r00         [17]  313 	call	_printf
+    000001A5 F1               [10]  314 	pop	af
+    000001A6 F1               [10]  315 	pop	af
+                                    316 ;Blink_MBC2.c:181: delay(12);
+    000001A7 21 0C 00         [10]  317 	ld	hl, #0x000c
+    000001AA CDr15r00         [17]  318 	call	_delay
+                                    319 ;Blink_MBC2.c:182: printf ("%c[m",27);                         // Reset all attributes
+    000001AD 01r6Cr02         [10]  320 	ld	bc, #___str_14+0
+    000001B0 21 1B 00         [10]  321 	ld	hl, #0x001b
+    000001B3 E5               [11]  322 	push	hl
+    000001B4 C5               [11]  323 	push	bc
+    000001B5 CDr00r00         [17]  324 	call	_printf
+    000001B8 F1               [10]  325 	pop	af
+                                    326 ;Blink_MBC2.c:183: printf ("%c[15;30H",27);
+    000001B9 21 1B 00         [10]  327 	ld	hl, #0x001b
+    000001BC E3               [19]  328 	ex	(sp),hl
+    000001BD 21r4Br02         [10]  329 	ld	hl, #___str_12
+    000001C0 E5               [11]  330 	push	hl
+    000001C1 CDr00r00         [17]  331 	call	_printf
+    000001C4 F1               [10]  332 	pop	af
+    000001C5 F1               [10]  333 	pop	af
+                                    334 ;Blink_MBC2.c:184: printf (" * * LED off * * ");
+    000001C6 01r71r02         [10]  335 	ld	bc, #___str_15+0
+    000001C9 C5               [11]  336 	push	bc
+    000001CA CDr00r00         [17]  337 	call	_printf
+    000001CD F1               [10]  338 	pop	af
+                                    339 ;Blink_MBC2.c:185: userLed(0);                                 // User led off
+    000001CE AF               [ 4]  340 	xor	a, a
+    000001CF CDr0Dr00         [17]  341 	call	_userLed
+                                    342 ;Blink_MBC2.c:186: delay(12);
+    000001D2 21 0C 00         [10]  343 	ld	hl, #0x000c
+    000001D5 CDr15r00         [17]  344 	call	_delay
+                                    345 ;Blink_MBC2.c:188: } 
+    000001D8 18 A8            [12]  346 	jr	00110$
+    000001DA                        347 ___str_1:
+    000001DA 00                     348 	.db 0x00
+    000001DB                        349 ___str_5:
+    000001DB 49 3D 25 64            350 	.ascii "I=%d"
+    000001DF 0A                     351 	.db 0x0a
+    000001E0 00                     352 	.db 0x00
+    000001E1                        353 ___str_6:
+    000001E1 0A                     354 	.db 0x0a
+    000001E2 50 72 65 73 73 20 55   355 	.ascii "Press USER key to continue..."
+             53 45 52 20 6B 65 79
+             20 74 6F 20 63 6F 6E
+             74 69 6E 75 65 2E 2E
+             2E
+    000001FF 00                     356 	.db 0x00
+    00000200                        357 ___str_7:
+    00000200 0A                     358 	.db 0x0a
+    00000201 50 72 65 73 73 20 27   359 	.ascii "Press 'b' to start blinking >"
+             62 27 20 74 6F 20 73
+             74 61 72 74 20 62 6C
+             69 6E 6B 69 6E 67 20
+             3E
+    0000021E 00                     360 	.db 0x00
+    0000021F                        361 ___str_8:
+    0000021F 0A                     362 	.db 0x0a
+    00000220 0A                     363 	.db 0x0a
+    00000221 41 74 20 6C 61 73 74   364 	.ascii "At last start blinking..."
+             20 73 74 61 72 74 20
+             62 6C 69 6E 6B 69 6E
+             67 2E 2E 2E
+    0000023A 00                     365 	.db 0x00
+    0000023B                        366 ___str_9:
+    0000023B 25 63 5B 32 4A         367 	.ascii "%c[2J"
+    00000240 00                     368 	.db 0x00
+    00000241                        369 ___str_10:
+    00000241 25 63 5B 3F 32 35 6C   370 	.ascii "%c[?25l"
+    00000248 00                     371 	.db 0x00
+    00000249                        372 ___str_11:
+    00000249 0D                     373 	.db 0x0d
+    0000024A 00                     374 	.db 0x00
+    0000024B                        375 ___str_12:
+    0000024B 25 63 5B 31 35 3B 33   376 	.ascii "%c[15;30H"
+             30 48
+    00000254 00                     377 	.db 0x00
+    00000255                        378 ___str_13:
+    00000255 25 63 5B 37 6D 20 2A   379 	.ascii "%c[7m * * LED on  * * "
+             20 2A 20 4C 45 44 20
+             6F 6E 20 20 2A 20 2A
+             20
+    0000026B 00                     380 	.db 0x00
+    0000026C                        381 ___str_14:
+    0000026C 25 63 5B 6D            382 	.ascii "%c[m"
+    00000270 00                     383 	.db 0x00
+    00000271                        384 ___str_15:
+    00000271 20 2A 20 2A 20 4C 45   385 	.ascii " * * LED off * * "
+             44 20 6F 66 66 20 2A
+             20 2A 20
+    00000282 00                     386 	.db 0x00
+    00000283                        387 ___str_16:
+    00000283 0A                     388 	.db 0x0a
+    00000284 0A                     389 	.db 0x0a
+    00000285 4A 75 73 74 20 73 6F   390 	.ascii "Just some counts..."
+             6D 65 20 63 6F 75 6E
+             74 73 2E 2E 2E
+    00000298 0A                     391 	.db 0x0a
+    00000299 00                     392 	.db 0x00
+                                    393 	.area _CODE
+                                    394 	.area _INITIALIZER
+    00000000                        395 __xinit__message:
+    00000000 48 65 6C 6C 6F 20 46   396 	.ascii "Hello Folk!"
+             6F 6C 6B 21
+    0000000B 00                     397 	.db 0x00
+                                    398 	.area _CABS (ABS)

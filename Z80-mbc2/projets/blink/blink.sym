@@ -1,0 +1,6 @@
+DELAY             0022
+EXTERN_WAIT       001b
+LOOP              0000
+LONG_DELAY        0019
+USERLED           0000
+WAIT              0025
