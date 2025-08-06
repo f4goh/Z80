@@ -1,4 +1,4 @@
-# 🧠 Z80-MBC2 – Projet Z80
+# Z80-MBC2 – Projet Z80
 
 Ce projet est une implémentation moderne et accessible d’un système basé sur le microprocesseur **Z80**, piloté par un microcontrôleur **ATmega32A**. Il permet de faire tourner CP/M et d'autres systèmes rétro sur du matériel DIY.
 
