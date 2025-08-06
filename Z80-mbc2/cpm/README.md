@@ -86,42 +86,10 @@ CALL 0005h       ; Appel BDOS
 MSG: DB 'Bonjour CP/M!$'
 ```
 
-## Tableau des fonctions BDOS – CP/M 2.2
+## Fonctions BDOS – CP/M 2.2
 
-| Code | Fonction BDOS               | Description                                                                 |
-|------|-----------------------------|-----------------------------------------------------------------------------|
-| 00h  | System Reset                | Quitte le programme, retourne au CCP                                       |
-| 01h  | Console Input               | Lit un caractère depuis la console                                         |
-| 02h  | Console Output              | Affiche un caractère sur la console                                        |
-| 03h  | Auxiliary Input             | Lit un caractère depuis le périphérique auxiliaire                         |
-| 04h  | Auxiliary Output            | Envoie un caractère au périphérique auxiliaire                             |
-| 05h  | List Output                 | Envoie un caractère à l’imprimante                                         |
-| 06h  | Direct Console I/O          | Lit ou écrit un caractère sans écho ni attente                             |
-| 07h  | Get I/O Byte                | Lit l’état des périphériques (entrée/sortie)                               |
-| 08h  | Set I/O Byte                | Définit l’état des périphériques                                           |
-| 09h  | Print String                | Affiche une chaîne terminée par `$`                                        |
-| 0Ah  | Read Console Buffer         | Lit une ligne depuis la console dans un tampon                             |
-| 0Bh  | Get Console Status          | Vérifie si une touche est disponible sans la lire                          |
-| 0Ch  | Return Version Number       | Retourne la version de CP/M                                                |
-| 0Dh  | Reset Disk System           | Réinitialise les disques                                                   |
-| 0Eh  | Select Disk                 | Sélectionne le disque actif (A=0, B=1, etc.)                                |
-| 0Fh  | Open File                   | Ouvre un fichier                                                           |
-| 10h  | Close File                  | Ferme un fichier                                                           |
-| 11h  | Search for First            | Recherche le premier fichier correspondant à un masque                    |
-| 12h  | Search for Next             | Recherche les fichiers suivants                                            |
-| 13h  | Delete File                 | Supprime un fichier                                                        |
-| 14h  | Read Sequential             | Lit un enregistrement de fichier                                           |
-| 15h  | Write Sequential            | Écrit un enregistrement de fichier                                         |
-| 16h  | Create File                 | Crée un nouveau fichier                                                    |
-| 17h  | Rename File                 | Renomme un fichier                                                         |
-| 18h  | Return Login Vector         | Retourne les disques logiques disponibles                                  |
-| 19h  | Return Current Disk         | Retourne le disque actif                                                   |
-| 1Ah  | Set DMA Address             | Définit l’adresse du tampon DMA                                            |
-| 1Bh  | Get Allocation              | Retourne la carte d’allocation du disque                                   |
-| 1Ch  | Write Protect Disk          | Active la protection en écriture                                           |
-| 1Dh  | Get Read-Only Status        | Vérifie si le disque est en lecture seule                                  |
-| 1Eh  | Set File Attributes         | Définit les attributs d’un fichier (rarement utilisé en CP/M 2.2)          |
-| 1Fh  | Get File Attributes         | Lit les attributs d’un fichier                                              |
+
+[BDOS calls](https://www.seasip.info/Cpm/bdos.html)
 
 
 [cpm-2.2 Source, Manuals and Utilities](https://github.com/Z80-Retro/cpm-2.2) 
