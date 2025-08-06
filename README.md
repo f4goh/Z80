@@ -7,7 +7,7 @@ Ce projet est une implémentation moderne et accessible d’un système basé su
 ## 📁 Références principales
 
 - 🔗 [Dépôt GitHub Z80-MBC2](https://github.com/f4goh/Z80/tree/main/Z80-mbc2)
-- 🌐 [Page HTML du projet](https://f4goh.github.io/Z80/)
+- 🌐 [Page HTML d'un assembleur Z80 en ligne](https://f4goh.github.io/Z80/)
 
 ---
 
