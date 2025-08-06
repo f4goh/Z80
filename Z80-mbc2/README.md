@@ -5,6 +5,8 @@ La carte dispose en option d’un expandeur GPIO 16x intégré, et utilise des m
 Elle possède également un Atmega32A, utilisé comme EEPROM et comme émulateur d’E/S « universel »
 C’est un véritable [écosystème de développement complet](https://hackaday.io/project/159973-z80-mbc2-a-4-ics-homebrew-z80-computer/details), et grâce au mode de démarrage iLoad, il est possible de compiler, charger et exécuter sur la cible un programme en assembleur ou en C (avec le compilateur SDCC) en une seule commande — comme dans l’environnement Arduino IDE.
 
+## Démarrage dans la console série (115200 bauds)
+
 ```console
 Z80-MBC2 - A040618
 IOS - I/O Subsystem - S220718-R290823
@@ -59,28 +61,28 @@ Allume la led sur GPA5 (MCP23017)
 
 ```asm
 LOOP:	
-		LD A, 0          ; Opcode pour écrire dans USERLED (0x00)
-        OUT (1), A       
-		LD A, 1          ; Allume USERLED
-        OUT (0), A       
+	LD A, 0          ; Opcode pour écrire dans USERLED (0x00)
+	OUT (1), A       
+	LD A, 1          ; Allume USERLED
+	OUT (0), A       
 
-        CALL LONG_DELAY       ; Pause 500ms
+	CALL LONG_DELAY       ; Pause 500ms
 
-		LD A, 0          ; Opcode pour écrire dans USERLED (0x00)
-        OUT (1), A       
-	    LD A, 0          ; Éteint USERLED
-        OUT (0), A       
+	LD A, 0          ; Opcode pour écrire dans USERLED (0x00)
+	OUT (1), A       
+	LD A, 0          ; Éteint USERLED
+	OUT (0), A       
 
-        CALL LONG_DELAY       ; Pause 500ms
+	CALL LONG_DELAY       ; Pause 500ms
 
-        JP LOOP          ; Boucle infinie
+	JP LOOP          ; Boucle infinie
 
 LONG_DELAY:
     LD D, 50       ; compteur externe
 EXTERN_WAIT:
     CALL DELAY     ; appelle délai de 10 ms
     DEC D
-    JP NZ, EXTERN_WAIT
+    JR NZ, EXTERN_WAIT
     RET
 	
 ; --- Sous-programme DELAY 10ms ---
@@ -116,11 +118,12 @@ Appuyez sur une touche pour continuer...
 ```console
 :100000003E00D3013E01D300CD19003E00D3013E96
 :1000100000D300CD1900C300001632CD230015C255
-:0D0020001B00C90181060B78B1C22600C982
+:0C0020001B00C90181060B78B120FBC950
 :00000001FF
 ```
 
 ## Charger le fichier HEX avec le menu iload
+
 
 ```console
 Z80-MBC2 - A040618
@@ -154,6 +157,7 @@ Waiting input stream...
 :00000001FF
 iLoad: Starting Address: 0000
 ```
+Ne pas oublier dans le paramètrage d'envoi de fichier HEX de CoolTerm ou tera Term, la temporisation de 90ms entre chaque ligne HEX.
 
 ## STORE Opcode – I/O Write Address (0x01)
 
