@@ -246,7 +246,7 @@ lignes 110-120 Affiche le caractère '!'
 120 OUT 0,ASC("!")
 ```
 
-## Exemple de programme ASM utilisant l'afficheur LCD i2C 2x16
+## Exemple de programme ASM utilisant l'afficheur LCD I2C 2x16
 ```asm
 #define equ .equ
 #define end .end
