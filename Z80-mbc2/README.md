@@ -195,7 +195,7 @@ Cette opération permet de **stocker un code d’opération I/O (Opcode)** et de
 | `0x12`     | WRSPP            | 1                |
 | `0xFF`     | No operation     | 1                |
 
-## 🔧 Ajout Opcodes définis pour l'afficheur LCD opérations I/O **Write**
+## 🔧 Ajout Opcodes définis pour opérations I/O **Write** de l'afficheur LCD I2C 2X16
 
 | Opcode     | Nom                | Octets échangés |
 |------------|--------------------|------------------|
@@ -223,7 +223,7 @@ Cette opération permet de **stocker un code d’opération I/O (Opcode)** et de
 | `0x8A`     | GETSPP           | 1                |
 | `0xFF`     | No operation     | 1                |
 
-## Exemple de programme BASIC utilisant l'afficheur LCD
+## Exemple de programme BASIC utilisant l'afficheur LCD I2C 2x16 
 
 lignes 10-20 Efface l'afficheur 
 lignes 30-50 deplace le curseur
@@ -246,7 +246,7 @@ lignes 110-120 Affiche le caractère '!'
 120 OUT 0,ASC("!")
 ```
 
-## Exemple de programme ASM utilisant l'afficheur LCD
+## Exemple de programme ASM utilisant l'afficheur LCD i2C 2x16
 ```asm
 #define equ .equ
 #define end .end
@@ -283,7 +283,7 @@ loop:
         JR Z, endloop
         OUT (0), A       ; Envoyer caractère
         INC HL           ; Suivant
-        JP loop
+        JR loop
 
 endloop:
         LD A, 0          ; OUT 0, 0
@@ -316,8 +316,8 @@ IOS: Z80 is running from now
 iLoad - Intel-Hex Loader - S200718
 Waiting input stream...
 :180000003E20D3013E01D3003E21D3013E04D3003E01D3003E23D30115
-:180018002135007EFE002806D30023C31B003E00D3003E22D3013E2158
-:0B003000D300C3320048454C4C4F0089
+:180018002134007EFE002805D3002318F63E00D3003E22D3013E21D357
+:0A00300000C3310048454C4C4F005E
 :00000001FF
 iLoad: Starting Address: 0000
 ```	

@@ -34,7 +34,7 @@ loop:
         JR Z, endloop
         OUT (0), A       ; Envoyer caractère
         INC HL           ; Suivant
-        JP loop
+        JR loop
 
 endloop:
         LD A, 0          ; OUT 0, 0

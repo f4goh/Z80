@@ -2,6 +2,6 @@ LCDCLEAR          0020
 LCDSETXY          0021
 LCDWRITE          0022
 LCDPRINT          0023
-endloop           0026
+endloop           0025
 loop              001b
-message           0035
+message           0034
