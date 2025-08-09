@@ -195,6 +195,15 @@ Cette opération permet de **stocker un code d’opération I/O (Opcode)** et de
 | `0x12`     | WRSPP            | 1                |
 | `0xFF`     | No operation     | 1                |
 
+## 🔧 Ajout Opcodes définis pour l'afficheur LCD opérations I/O **Write**
+
+| Opcode     | Nom                | Octets échangés |
+|------------|--------------------|------------------|
+| `0x20`     | LCD CLEAR          | 1                |
+| `0x21`     | LCD SET CURSOR XY  | 2                |
+| `0x22`     | LCD WRITE          | 1                |
+| `0x23`     | LCD PRINT          | 17(max)          |
+
 ---
 
 ## 🔍 Opcodes définis pour les opérations I/O **Read**
@@ -213,6 +222,105 @@ Cette opération permet de **stocker un code d’opération I/O (Opcode)** et de
 | `0x89`     | SYSIRQ           | 1                |
 | `0x8A`     | GETSPP           | 1                |
 | `0xFF`     | No operation     | 1                |
+
+## Exemple de programme BASIC utilisant l'afficheur LCD
+
+lignes 10-20 Efface l'afficheur 
+lignes 30-50 deplace le curseur
+lignes 60-100 Affiche HELLO
+lignes 110-120 Affiche le caractère '!'
+
+```console
+10 OUT 1,&H20
+20 OUT 0,1
+30 OUT 1,&H21
+40 OUT 0,4
+50 OUT 0,1
+60 A$="HELLO"
+65 OUT 1,&H23
+70 FOR I=1 TO LEN(A$)
+80 OUT 0,ASC(MID$(A$,I,1))
+90 NEXT I
+100 OUT 0,0
+110 OUT 1,&H22
+120 OUT 0,ASC("!")
+```
+
+## Exemple de programme ASM utilisant l'afficheur LCD
+```asm
+#define equ .equ
+#define end .end
+#define db  .db
+
+LCDCLEAR:    equ 20h
+LCDSETXY:    equ 21h
+LCDWRITE:    equ 22h
+LCDPRINT:    equ 23h
+
+
+        LD A, LCDCLEAR   ; OUT 1, &H20
+        OUT (1), A
+
+        LD A, 1          ; OUT 0, 1
+        OUT (0), A
+
+        LD A, LCDSETXY        ; OUT 1, &H21
+        OUT (1), A
+
+        LD A, 4          ; OUT 0, 4
+        OUT (0), A
+
+        LD A, 1          ; OUT 0, 1
+        OUT (0), A
+
+        LD A, LCDPRINT        ; OUT 1, &H23
+        OUT (1), A
+
+        LD HL, message   ; HL pointe vers la chaîne "HELLO"
+loop:
+        LD A, (HL)       ; Charger le caractère
+        CP 0             ; Fin de chaîne ?
+        JR Z, endloop
+        OUT (0), A       ; Envoyer caractère
+        INC HL           ; Suivant
+        JP loop
+
+endloop:
+        LD A, 0          ; OUT 0, 0
+        OUT (0), A
+
+        LD A, LCDWRITE        ; OUT 1, &H22
+        OUT (1), A
+
+        LD A, '!'        ; OUT 0, ASC("!")
+        OUT (0), A
+
+        JP $
+
+message:
+        db	"HELLO", 0    ; Chaîne terminée par 0
+
+	end
+```	
+
+```console
+Z80-MBC2 - A040618
+IOS - I/O Subsystem - S220718-R290823
+
+IOS: Z80 clock set at 4MHz
+IOS: Found GPE Option
+IOS: CP/M Autoexec is OFF
+IOS: Loading boot program... Done
+IOS: Z80 is running from now
+
+iLoad - Intel-Hex Loader - S200718
+Waiting input stream...
+:180000003E20D3013E01D3003E21D3013E04D3003E01D3003E23D30115
+:180018002135007EFE002806D30023C31B003E00D3003E22D3013E2158
+:0B003000D300C3320048454C4C4F0089
+:00000001FF
+iLoad: Starting Address: 0000
+```	
 
 ## Exemples de programmes en BASIC
 
