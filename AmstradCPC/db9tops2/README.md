@@ -200,17 +200,7 @@ Le relâchement d'une touche est envoyé sous la forme `F0 xx` (ou `E0 F0 xx` po
 
 ## Schéma de principe
 
-```mermaid
-flowchart LR
-    J1["Joystick DB9 n°1"] -->|"D4-D9"| NANO["Arduino Nano<br/>(5 V)"]
-    NES["Manette NES"] <-->|"D10-D12"| NANO
-    J2["Joystick DB9 n°2"] -->|"A0-A5"| NANO
-    NANO <-->|"PS/2 CLK D2 / DATA D3"| TTGO["ESP32 TTGO VGA32<br/>(adaptateurs 3,3 V / 5 V intégrés)"]
-    TTGO --> VGA["Écran VGA<br/>Émulateur CPCESP"]
-    PC["PC - moniteur série"] -.->|"USB (debug)"| NANO
-```
-
-![Schéma de câblage](images/schema.png)
+Bientôt
 
 ---
 
@@ -221,8 +211,7 @@ flowchart LR
 | `version_nano.ino` | Programme principal (lecture des manettes, envoi PS/2, test série) |
 | `ps2dev.h` / `ps2dev.cpp` | Bibliothèque d'émulation de périphérique PS/2 ([Harvie/ps2dev](https://github.com/Harvie/ps2dev)) |
 | `nes.h` / `nes.cpp` | Bibliothèque de lecture de manette NES (Daniel Fanara), légèrement corrigée |
-| `README.md` | Ce document |
-| `images/` | Photos et schémas du projet |
+
 
 Corrections apportées à la bibliothèque NES :
 - broche DATA en `INPUT_PULLUP` (manette débranchée = aucun bouton appuyé, pas de touches fantômes) ;
@@ -251,19 +240,6 @@ Connecter l'adaptateur sur le port ps2 de la souris
 
 ## Fonctionnement du programme
 
-```mermaid
-flowchart TD
-    S["setup()<br/>Série 115200, entrées DB9 en pull-up,<br/>init PS/2 (0xAA)"] --> L["loop()"]
-    L --> R{"millis() > 2,5 s<br/>et pas encore ré-initialisé ?"}
-    R -->|oui| I["keyboard_init() à nouveau"] --> H
-    R -->|non| H["keyboard_handle()<br/>réponse aux commandes de l'hôte"]
-    H --> J["joysticksProcess()"]
-    J --> D["db9Read() : 12 entrées DB9<br/>avec anti-rebond"]
-    D --> N["nesRead() : lecture NES toutes les 5 ms<br/>avec anti-rebond"]
-    N --> K["keysUpdate() : OU logique DB9 / NES,<br/>envoi uniquement des changements"]
-    K --> T["serialProcess() : test a / b / c"]
-    T --> L
-```
 
 - **Entrées → touches logiques** : chaque entrée (broche DB9 ou bouton NES) est associée à une touche logique (`K1_UP`, `K2_FIRE1`…).
 - **Combinaison** : une touche est considérée comme appuyée si **au moins une** de ses entrées est appuyée (DB9 n°1 **ou** NES). On peut donc utiliser l'une, l'autre ou les deux sans touche bloquée.
