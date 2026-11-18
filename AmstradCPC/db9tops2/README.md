@@ -303,7 +303,78 @@ J2 Gauche appuye
 | Erreur au téléversement | Essayer `ATmega328P (Old Bootloader)` |
 
 ---
+## Raccourcis et commandes CPCESP
 
+*Astuce : `CTRL+F1` les affiche aussi directement dans l'émulateur.*
+
+### Raccourcis clavier en cours d'exécution
+
+| Touches | Action |
+| :--- | :--- |
+| **F1** | Menu principal |
+| **SHIFT+F1** | Infos matériel |
+| **CTRL+F1** | Aide |
+| **F2 / F3** | Explorateurs de fichiers |
+| **SHIFT+F2** | Entrée audio oui / non |
+| **CTRL+F2** | Turbo |
+| **F4** | Lecteur actif : A / B |
+| **SHIFT+F4** | Éjecter la disquette du lecteur actif |
+| **CTRL+F4** | Retourner cette disquette |
+| **F5** | Cassette : Play / Stop |
+| **SHIFT+F5** | Éjecter la cassette |
+| **CTRL+F5** | Blocs de la cassette |
+| **F6** | Explorateur de snapshots |
+| **F7** | Snapshot rapide |
+| **SHIFT+F7 / F8** | Centrage CRT : horizontal |
+| **CTRL+F7 / F8** | Centrage CRT : vertical |
+| **F8** | OSD : CPU et cassette |
+| **F9 / F10** | Volume - / + |
+| **F11 / F12** | Reset / reset ESP32 |
+| **Pause** | Pause |
+| **Impr** | Capture BMP |
+| **ArrDéf** | Flèches en joystick |
+
+---
+
+### Touches au démarrage
+
+CPCESP regarde le clavier une fraction de seconde au démarrage. Deux touches enfoncées à ce moment-là choisissent le mode vidéo ou effacent les réglages, et permettent aussi de sortir d'un mode que votre moniteur ne peut pas afficher.
+
+1. Maintenez enfoncées les deux touches de la combinaison.
+2. Allumez la carte, ou appuyez sur son bouton de reset, et ne les relâchez pas avant l'apparition de l'image.
+3. Le mode vidéo est enregistré : il suffit de le faire une fois, et il reste le même à chaque démarrage jusqu'à ce que vous en choisissiez un autre.
+
+### Mode vidéo
+
+Un chiffre (`1`, `2`, `3`) et une lettre (`Q`, `W`, `E`). Le chiffre choisit la largeur et la lettre, le type de sortie.
+
+| Touches | Mode vidéo |
+| :--- | :--- |
+| **1 + Q** | VGA 384×288 · 60 Hz |
+| **2 + Q** | VGA 400×300 · 60 Hz (celui d'origine) |
+| **3 + Q** | VGA 720×288 · 60 Hz |
+| **1 + W** | VGA 384×288 · 50 Hz |
+| **2 + W** | VGA 400×300 · 50 Hz |
+| **3 + W** | VGA 720×288 · 50 Hz |
+| **1 + E** ou **2 + E** | CRT 15 kHz 384×288 · 50 Hz |
+| **3 + E** | CRT 15 kHz 768×288 · 50 Hz |
+| **4 + W** | VGA 720×576 · 50 Hz (576p) |
+
+> **Notes :**
+> * Les modes 50 Hz suivent le même rythme d'images que le CPC lui-même.
+> * Le 576p suit le timing standard du 576p50, pour les cartes de capture, les convertisseurs HDMI et les moniteurs qui n'acceptent que les modes standard.
+> * Le mode utilisé s'affiche dans les infos matériel (`SHIFT+F1`).
+
+### Retour aux réglages d'usine
+
+* **0 + Z** : Efface les réglages de CPCESP, le mode vidéo compris, et redémarre la carte. Au démarrage suivant, la carte est détectée de nouveau et on vous demande de la confirmer. Les réglages des autres émulateurs sur la même carte ne sont pas touchés.
+
+> **À savoir :**
+> * Les disquettes, cassettes et snapshots de la carte microSD ne sont pas touchés non plus.
+> * Sur les ESPectrum et ESPectrum+, leur propre clavier ZX fonctionne aussi : une carte sans clavier PS/2 se récupère donc de la même façon.
+
+
+---
 ## Crédits
 
 - Projet d'origine **DB9_2_Keyboard** : David Carrión (2023-2024), licence GPL v3 — voir `../DB9_2_Keyboard/LICENSE`.
